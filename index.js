@@ -4,7 +4,7 @@ const multer = require("multer");
 require('dotenv').config()
 
 const app = express();
-const upload = multer({ dest: "uploads/" });
+const upload = multer();
 
 app.use(cors());
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -14,8 +14,6 @@ app.get('/', function (req, res) {
 });
 
 function uploadFiles(req, res) {
-  console.log(req.body);
-  console.log(req.files);
   const file = req.files[0]
   res.json({ name: file.originalname, type: file.mimetype, size: file.size });
 }
